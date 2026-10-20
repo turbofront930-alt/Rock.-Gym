@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCK GYM | Elite Training Facility</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#3b82f6',
+                        darkBg: '#09090b',
+                        cardBg: '#121216',
+                        lightBg: '#f8fafc',
+                        lightCard: '#ffffff'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        body.lang-ar { font-family: 'Cairo', sans-serif; direction: rtl; text-align: right; }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-white antialiased selection:bg-brand selection:text-white transition-colors duration-300" id="body-theme">
+
+    <!-- Top Announcement Marquee Bar -->
+    <div class="bg-brand text-black text-xs font-black uppercase py-2 overflow-hidden fixed top-0 left-0 w-full z-50">
+        <div class="animate-marquee whitespace-nowrap flex space-x-12 rtl:space-x-reverse">
+            <span>🔥 SPECIAL OFFER: GET FULL MONTH UNLIMITED ACCESS FOR ONLY 250 EGP!</span>
+            <span>⚡ YOUR HEALTH • YOUR STRENGTH • YOUR BETTER LIFE</span>
+            <span>🔥 SPECIAL OFFER: GET FULL MONTH UNLIMITED ACCESS FOR ONLY 250 EGP!</span>
+            <span>⚡ YOUR HEALTH • YOUR STRENGTH • YOUR BETTER LIFE</span>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-9 left-0 w-full z-40 bg-darkBg/90 dark:bg-darkBg/90 bg-white/90 backdrop-blur-md border-b border-white/10 dark:border-white/10 border-gray-200 transition-colors duration-300" id="header-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-black tracking-widest uppercase italic dark:text-white text-gray-900">ROCK<span class="text-brand">.</span> GYM</a>
+            <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse text-sm font-semibold tracking-wider">
+                <a href="#about" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="PHILOSOPHY" data-ar="الفلسفة">PHILOSOPHY</a>
+                <a href="#schedule" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="SCHEDULE" data-ar="المواعيد">SCHEDULE</a>
+                <a href="#bmi-calculator" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="BMI CALCULATOR" data-ar="حاسبة الوزن">BMI CALCULATOR</a>
+                <a href="#gallery" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="GALLERY" data-ar="الصور">GALLERY</a>
+                <a href="#pricing" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="MEMBERSHIP" data-ar="الاشتراكات">MEMBERSHIP</a>
+                <a href="#faq" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="FAQ" data-ar="الأسئلة">FAQ</a>
+                <a href="#contact" class="hover:text-brand transition dark:text-gray-300 text-gray-700" data-en="LOCATION" data-ar="العنوان">LOCATION</a>
+            </nav>
+            <div class="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
+                <button onclick="toggleTheme()" class="bg-gray-200 dark:bg-white/10 hover:bg-brand dark:hover:bg-brand text-xs font-bold p-2.5 rounded transition text-gray-800 dark:text-white" title="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline"></i>
+                </button>
+                <button id="lang-btn" onclick="toggleLanguage()" class="bg-gray-200 dark:bg-white/10 hover:bg-brand dark:hover:bg-brand text-xs font-bold px-3 py-2 rounded transition uppercase text-gray-800 dark:text-white">
+                    العربية 🇸🇦
+                </button>
+                <a href="#booking" class="bg-brand text-white font-extrabold px-5 py-3 text-xs tracking-widest uppercase hover:bg-blue-600 transition rounded" data-en="BOOK PASS" data-ar="حجز حصة">
+                    BOOK PASS
+                </a>
+            </div>
+            <div class="flex items-center space-x-2 md:hidden">
+                <button onclick="toggleTheme()" class="bg-gray-200 dark:bg-white/10 text-xs font-bold p-2 rounded text-gray-800 dark:text-white"><i class="fa-solid fa-circle-half-stroke"></i></button>
+                <button onclick="toggleLanguage()" class="bg-gray-200 dark:bg-white/10 text-xs font-bold px-2.5 py-2 rounded uppercase text-gray-800 dark:text-white" id="lang-btn-mob">عربي</button>
+                <button id="menu-btn" class="text-xl dark:text-white text-gray-900 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden dark:bg-cardBg bg-white border-b border-white/10 px-6 py-4 space-y-3 shadow-lg">
+            <a href="#about" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="PHILOSOPHY" data-ar="الفلسفة">PHILOSOPHY</a>
+            <a href="#schedule" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="SCHEDULE" data-ar="المواعيد">SCHEDULE</a>
+            <a href="#bmi-calculator" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="BMI CALCULATOR" data-ar="حاسبة الوزن">BMI CALCULATOR</a>
+            <a href="#gallery" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="GALLERY" data-ar="الصور">GALLERY</a>
+            <a href="#pricing" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="MEMBERSHIP" data-ar="الاشتراكات">MEMBERSHIP</a>
+            <a href="#faq" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="FAQ" data-ar="الأسئلة">FAQ</a>
+            <a href="#contact" class="block text-sm font-semibold dark:text-gray-300 text-gray-700" data-en="LOCATION" data-ar="العنوان">LOCATION</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center bg-cover bg-center pt-16" style="background-image: linear-gradient(to bottom, rgba(9,9,11,0.7), rgba(9,9,11,0.95)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1920&auto=format&fit=crop');">
+        <div class="max-w-5xl mx-auto text-center px-6 z-10 mt-12">
+            <span class="text-brand font-bold tracking-widest text-sm md:text-base uppercase block mb-4" data-en="YOUR HEALTH • YOUR STRENGTH • YOUR BETTER LIFE" data-ar="صحتك .. قوتك .. حياتك الأفضل">YOUR HEALTH • YOUR STRENGTH • YOUR BETTER LIFE</span>
+            <h1 class="text-5xl md:text-8xl font-black uppercase italic tracking-tight mb-6 leading-none text-white" data-en="BUILT FOR <span class='text-brand'>RESULTS</span>" data-ar="مصمم لأجل <span class='text-brand'>النتائج</span>">
+                BUILT FOR <span class="text-brand">RESULTS</span>
+            </h1>
+            <p class="text-gray-300 max-w-2xl mx-auto text-base md:text-lg mb-10 font-light" data-en="Professional coaching, dedicated training schedules, and a powerful environment tailored to help you reach peak conditioning and total transformation." data-ar="تدريب احترافي، مواعيد مخصصة، وبيئة قوية مصممة لمساعدتك على الوصول لأفضل لياقة وتغيير شامل لجسمك.">
+                Professional coaching, dedicated training schedules, and a powerful environment tailored to help you reach peak conditioning and total transformation.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#booking" class="w-full sm:w-auto bg-brand text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:bg-blue-600 transition rounded" data-en="BOOK A SESSION" data-ar="حجز حصة تجريبية">
+                    BOOK A SESSION
+                </a>
+                <button onclick="downloadGuide()" class="w-full sm:w-auto border border-white/20 text-white font-bold px-8 py-4 uppercase tracking-widest text-sm hover:border-brand hover:text-brand transition rounded" data-en="FREE NUTRITION GUIDE" data-ar="تحميل دليل التغذية المجاني">
+                    FREE NUTRITION GUIDE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Counters Section -->
+    <section class="py-12 dark:bg-cardBg bg-white border-y border-white/10 dark:border-white/10 border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <h3 class="text-4xl md:text-5xl font-black text-brand mb-1">250+</h3>
+                <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Active Members" data-ar="عضو نشط">Active Members</p>
+            </div>
+            <div>
+                <h3 class="text-4xl md:text-5xl font-black text-brand mb-1">100%</h3>
+                <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Dedication" data-ar="التزام واحترافية">Dedication</p>
+            </div>
+            <div>
+                <h3 class="text-4xl md:text-5xl font-black text-brand mb-1">25 EGP</h3>
+                <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Daily Pass" data-ar="حصة يومية">Daily Pass</p>
+            </div>
+            <div>
+                <h3 class="text-4xl md:text-5xl font-black text-brand mb-1">2 Shifts</h3>
+                <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Ladies & Men" data-ar="فترات بنات وشباب">Ladies & Men</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy / About Section -->
+    <section id="about" class="py-24 px-6 dark:bg-cardBg/50 bg-gray-50 border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="THE ROCK GYM STANDARD" data-ar="معايير روكي جيم">THE ROCK GYM STANDARD</span>
+                <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6 dark:text-white text-gray-900" data-en="MORE THAN A WORKOUT. <br>A LIFESTYLE SHIFT." data-ar="أكثر من مجرد تمرينة. <br>نقلة نوعية لحياتك.">MORE THAN A WORKOUT. <br>A LIFESTYLE SHIFT.</h2>
+                <p class="dark:text-gray-400 text-gray-600 font-light leading-relaxed mb-6" data-en="At Rock Gym, we don't just provide equipment—we provide a path to absolute confidence, strength, and health. Whether you are stepping into a gym for the first time or pushing past personal boundaries, our expert coaching structure ensures you achieve your ultimate targets step by step." data-ar="في روكي جيم، إحنا مش بنوفر أجهزة وبس — إحنا بنرسم لك طريق الثقة، القوة، والصحة. سواء دي أول مرة تدخل فيها جيم أو بتعدي حدودك، نظام التدريب المخصص بتاعنا هيخليك توصل لهدفك خطوة بخطوة.">
+                    At Rock Gym, we don't just provide equipment—we provide a path to absolute confidence, strength, and health. Whether you are stepping into a gym for the first time or pushing past personal boundaries, our expert coaching structure ensures you achieve your ultimate targets step by step.
+                </p>
+                <div class="grid grid-cols-2 gap-6 pt-4 border-t dark:border-white/10 border-gray-200">
+                    <div>
+                        <h3 class="text-3xl font-black text-brand mb-1">100%</h3>
+                        <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Commitment to Goals" data-ar="التزام تام بأهدافك">Commitment to Goals</p>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-black text-brand mb-1">Pro</h3>
+                        <p class="text-xs dark:text-gray-400 text-gray-600 uppercase tracking-wider" data-en="Specialized Coaching" data-ar="تدريب متخصص">Specialized Coaching</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-96 bg-cover bg-center rounded-lg border dark:border-white/10 border-gray-200 shadow-md" style="background-image: url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1000&auto=format&fit=crop');"></div>
+        </div>
+    </section>
+
+    <!-- Schedule & Shift Section -->
+    <section id="schedule" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="TIMETABLE & SHIFTS" data-ar="المواعيد والفترات">TIMETABLE & SHIFTS</span>
+            <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="TRAINING HOURS" data-ar="مواعيد العمل">TRAINING HOURS</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Ladies Shift -->
+            <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 rounded-lg hover:border-brand transition shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-black uppercase tracking-wide text-brand" data-en="Ladies Shift" data-ar="فترة البنات">Ladies Shift</h3>
+                    <i class="fa-solid fa-person-dress text-2xl text-brand"></i>
+                </div>
+                <p class="dark:text-gray-400 text-gray-600 text-sm font-light mb-4" data-en="Dedicated private coaching environment focusing on toning, weight loss, and personal wellness." data-ar="بيئة تدريب خاصة ومجهزة للتركيز على خسارة الوزن، التونس، واللياقة البدنية.">Dedicated private coaching environment focusing on toning, weight loss, and personal wellness.</p>
+                <ul class="space-y-3 text-sm dark:text-gray-300 text-gray-700 font-light mb-6 border-t dark:border-white/10 border-gray-100 pt-4">
+                    <li><i class="fa-regular fa-clock text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Daily:" data-ar="يومياً من:">Daily:</strong> <span data-en="9:30 AM – 2:30 PM" data-ar="9:30 صباحاً لـ 2:30 ظهراً">9:30 AM – 2:30 PM</span></li>
+                    <li><i class="fa-solid fa-calendar-xmark text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Off Days:" data-ar="أيام الإجازة:">Off Days:</strong> <span data-en="Tuesday & Thursday" data-ar="الثلاثاء والخميس إجازة">Tuesday & Thursday</span></li>
+                    <li><i class="fa-solid fa-phone text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Coach Contact:" data-ar="رقم كابتن البنات:">Coach Contact:</strong> <a href="tel:01154445363" class="text-brand font-bold hover:underline">01154445363</a></li>
+                </ul>
+            </div>
+            <!-- Men's Shift -->
+            <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 rounded-lg hover:border-brand transition shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-black uppercase tracking-wide text-brand" data-en="Men's Shift" data-ar="فترة الشباب">Men's Shift</h3>
+                    <i class="fa-solid fa-person text-2xl text-brand"></i>
+                </div>
+                <p class="dark:text-gray-400 text-gray-600 text-sm font-light mb-4" data-en="High-performance strength training, heavy conditioning, and muscle building floor." data-ar="تمارين القوة عالية الأداء، تقوية العضلات، ومعدات بناء الاجسام الاحترافية.">High-performance strength training, heavy conditioning, and muscle building floor.</p>
+                <ul class="space-y-3 text-sm dark:text-gray-300 text-gray-700 font-light mb-6 border-t dark:border-white/10 border-gray-100 pt-4">
+                    <li><i class="fa-regular fa-clock text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Daily:" data-ar="يومياً من:">Daily:</strong> <span data-en="4:30 PM – 12:30 AM" data-ar="4:30 مساءً لـ 12:30 بعد منتصف الليل">4:30 PM – 12:30 AM</span></li>
+                    <li><i class="fa-solid fa-calendar-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Availability:" data-ar="متاح:">Availability:</strong> <span data-en="Open All Week" data-ar="طوال أيام الأسبوع">Open All Week</span></li>
+                    <li><i class="fa-solid fa-phone text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <strong data-en="Coach Contact:" data-ar="رقم كابتن الشباب:">Coach Contact:</strong> <a href="tel:+201029896523" class="text-brand font-bold hover:underline">+20 10 29896523</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- BMI Calculator Section -->
+    <section id="bmi-calculator" class="py-24 px-6 dark:bg-cardBg/30 bg-gray-100 border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-2xl mx-auto dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 md:p-12 rounded-lg shadow-md">
+            <div class="text-center mb-8">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="CHECK YOUR FITNESS" data-ar="أداة قياس اللياقة">CHECK YOUR FITNESS</span>
+                <h2 class="text-3xl md:text-4xl font-black uppercase italic dark:text-white text-gray-900" data-en="BMI CALCULATOR" data-ar="حاسبة مؤشر كتلة الجسم">BMI CALCULATOR</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase font-bold mb-1 dark:text-gray-400 text-gray-600" data-en="Weight (kg)" data-ar="الوزن (كجم)">Weight (kg)</label>
+                        <input type="number" id="bmi-weight" class="w-full dark:bg-darkBg bg-gray-50 border dark:border-white/20 border-gray-300 rounded px-4 py-3 dark:text-white text-gray-900 focus:border-brand focus:outline-none text-sm" placeholder="70">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-bold mb-1 dark:text-gray-400 text-gray-600" data-en="Height (cm)" data-ar="الطول (سم)">Height (cm)</label>
+                        <input type="number" id="bmi-height" class="w-full dark:bg-darkBg bg-gray-50 border dark:border-white/20 border-gray-300 rounded px-4 py-3 dark:text-white text-gray-900 focus:border-brand focus:outline-none text-sm" placeholder="175">
+                    </div>
+                </div>
+                <button onclick="calculateBMI()" class="w-full bg-brand text-white font-black py-3 uppercase tracking-widest text-xs hover:bg-blue-600 transition rounded shadow" data-en="CALCULATE NOW" data-ar="احسب النتيجة الآن">CALCULATE NOW</button>
+                <div id="bmi-result" class="hidden text-center p-4 rounded bg-brand/10 border border-brand/30 mt-4 text-sm font-bold dark:text-white text-gray-900"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="VISUAL TOUR" data-ar="جولة بصرية">VISUAL TOUR</span>
+            <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="GYM GALLERY" data-ar="معرض الصور">GYM GALLERY</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="h-72 bg-cover bg-center rounded-lg border dark:border-white/10 border-gray-200 hover:border-brand transition shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop');"></div>
+            <div class="h-72 bg-cover bg-center rounded-lg border dark:border-white/10 border-gray-200 hover:border-brand transition shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop');"></div>
+            <div class="h-72 bg-cover bg-center rounded-lg border dark:border-white/10 border-gray-200 hover:border-brand transition shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop');"></div>
+        </div>
+    </section>
+
+    <!-- Pricing / Membership Section -->
+    <section id="pricing" class="py-24 px-6 dark:bg-cardBg/30 bg-gray-50 border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="FLEXIBLE OPTIONS" data-ar="باقات مرنة">FLEXIBLE OPTIONS</span>
+                <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="MEMBERSHIP PLANS" data-ar="خطط الاشتراكات">MEMBERSHIP PLANS</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Daily Drop-in -->
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 flex flex-col justify-between rounded-lg shadow-sm">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2 dark:text-white text-gray-900" data-en="Daily Pass" data-ar="الحصة اليومية">Daily Pass</h3>
+                        <p class="dark:text-gray-400 text-gray-600 text-xs mb-6" data-en="Test the waters or drop by occasionally." data-ar="جرب الجيم أو تمرن بالحصة حسب وقتك.">Test the waters or drop by occasionally.</p>
+                        <div class="text-4xl font-black mb-6 dark:text-white text-gray-900">25 <span class="text-xs font-light dark:text-gray-400 text-gray-600 uppercase" data-en="EGP" data-ar="جنيه">EGP</span><span class="text-sm font-light dark:text-gray-400 text-gray-600" data-en="/day" data-ar="/يوم">/day</span></div>
+                        <ul class="space-y-3 text-sm dark:text-gray-300 text-gray-700 font-light mb-8">
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Full Training Access" data-ar="دخول كامل للجيم">Full Training Access</span></li>
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Single Session Pass" data-ar="حصة يومية واحدة">Single Session Pass</span></li>
+                        </ul>
+                    </div>
+                    <a href="#booking" class="w-full bg-gray-100 dark:bg-white/10 dark:text-white text-gray-900 text-center font-bold py-3 uppercase text-xs tracking-widest hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white transition rounded" data-en="Get Started" data-ar="اختر الباقة">Get Started</a>
+                </div>
+                <!-- Half Month (Featured) -->
+                <div class="dark:bg-cardBg bg-white border-2 border-brand p-8 flex flex-col justify-between relative rounded-lg shadow-md">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded" data-en="FLEXIBLE START" data-ar="بداية مرنة">FLEXIBLE START</span>
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2 dark:text-white text-gray-900" data-en="Bi-Weekly Plan" data-ar="اشتراك نصف شهر">Bi-Weekly Plan</h3>
+                        <p class="dark:text-gray-400 text-gray-600 text-xs mb-6" data-en="Kickstart your journey mid-month." data-ar="ابدا رحلتك في نص الشهر براحتك واسأل الكابتن عن التفاصيل.">Kickstart your journey mid-month.</p>
+                        <div class="text-4xl font-black mb-6 dark:text-white text-gray-900" data-en="Custom" data-ar="حسب الرغبة">Custom<span class="text-xs font-light dark:text-gray-400 text-gray-600 uppercase block" data-en="Ask Coach" data-ar="اسأل الكابتن">Ask Coach</span></div>
+                        <ul class="space-y-3 text-sm dark:text-gray-300 text-gray-700 font-light mb-8">
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="15 Days Access" data-ar="إمكانية دخول 15 يوم">15 Days Access</span></li>
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Guided Coaching Support" data-ar="دعم وتوجيه تدريبي">Guided Coaching Support</span></li>
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Perfect for Starters" data-ar="ممتاز للمبتدئين">Perfect for Starters</span></li>
+                        </ul>
+                    </div>
+                    <a href="#booking" class="w-full bg-brand text-white text-center font-black py-3 uppercase text-xs tracking-widest hover:bg-blue-600 transition rounded" data-en="Inquire Now" data-ar="اسأل عن التفاصيل">Inquire Now</a>
+                </div>
+                <!-- Monthly Plan -->
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 flex flex-col justify-between rounded-lg shadow-sm">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2 dark:text-white text-gray-900" data-en="Monthly Elite" data-ar="اشتراك الشهر">Monthly Elite</h3>
+                        <p class="dark:text-gray-400 text-gray-600 text-xs mb-6" data-en="Full dedication, best overall value." data-ar="أفضل قيمة وأعلى التزام لهدفك وخسارة الوزن.">Full dedication, best overall value.</p>
+                        <div class="text-4xl font-black mb-6 dark:text-white text-gray-900">250 <span class="text-xs font-light dark:text-gray-400 text-gray-600 uppercase" data-en="EGP" data-ar="جنيه">EGP</span><span class="text-sm font-light dark:text-gray-400 text-gray-600" data-en="/mo" data-ar="/شهر">/mo</span></div>
+                        <ul class="space-y-3 text-sm dark:text-gray-300 text-gray-700 font-light mb-8">
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Full Month Unlimited Access" data-ar="دخول غير محدود طوال الشهر">Full Month Unlimited Access</span></li>
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Complete Weight Loss Support" data-ar="دعم كامل لإنقاص الوزن">Complete Weight Loss Support</span></li>
+                            <li><i class="fa-solid fa-check text-brand mr-2 rtl:ml-2 rtl:mr-0"></i> <span data-en="Progress Tracking" data-ar="متابعة مستمرة للنتائج">Progress Tracking</span></li>
+                        </ul>
+                    </div>
+                    <a href="#booking" class="w-full bg-gray-100 dark:bg-white/10 dark:text-white text-gray-900 text-center font-bold py-3 uppercase text-xs tracking-widest hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white transition rounded" data-en="Choose Plan" data-ar="اختر الباقة">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Booking Form Section -->
+    <section id="booking" class="py-24 px-6 dark:bg-cardBg/40 bg-white border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-3xl mx-auto dark:bg-cardBg bg-gray-50 border dark:border-white/10 border-gray-200 p-8 md:p-12 rounded-lg shadow-md">
+            <div class="text-center mb-10">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="QUICK REGISTRATION" data-ar="تسجيل سريع">QUICK REGISTRATION</span>
+                <h2 class="text-3xl md:text-5xl font-black uppercase italic dark:text-white text-gray-900" data-en="BOOK YOUR SESSION" data-ar="احجز حصتك الآن">BOOK YOUR SESSION</h2>
+            </div>
+            <form onsubmit="sendToWhatsApp(event)" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold mb-2 dark:text-gray-400 text-gray-600" data-en="Your Name" data-ar="اسمك الكريم">Your Name</label>
+                        <input type="text" id="client-name" required class="w-full dark:bg-darkBg bg-white border dark:border-white/20 border-gray-300 rounded px-4 py-3 dark:text-white text-gray-900 focus:border-brand focus:outline-none text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold mb-2 dark:text-gray-400 text-gray-600" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                        <input type="tel" id="client-phone" required class="w-full dark:bg-darkBg bg-white border dark:border-white/20 border-gray-300 rounded px-4 py-3 dark:text-white text-gray-900 focus:border-brand focus:outline-none text-sm" placeholder="010XXXXXXXX">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider font-bold mb-2 dark:text-gray-400 text-gray-600" data-en="Select Plan / Shift" data-ar="اختر الباقة أو الفترة">Select Plan / Shift</label>
+                    <select id="client-plan" class="w-full dark:bg-darkBg bg-white border dark:border-white/20 border-gray-300 rounded px-4 py-3 dark:text-white text-gray-900 focus:border-brand focus:outline-none text-sm">
+                        <option value="Monthly Elite (250 EGP)" data-en="Monthly Elite (250 EGP)" data-ar="اشتراك الشهر (250 جنيه)">Monthly Elite (250 EGP)</option>
+                        <option value="Daily Pass (25 EGP)" data-en="Daily Pass (25 EGP)" data-ar="الحصة اليومية (25 جنيه)">Daily Pass (25 EGP)</option>
+                        <option value="Bi-Weekly Plan" data-en="Bi-Weekly Plan" data-ar="اشتراك نصف شهر">Bi-Weekly Plan</option>
+                        <option value="Ladies Shift" data-en="Ladies Shift" data-ar="فترة البنات">Ladies Shift</option>
+                        <option value="Men's Shift" data-en="Men's Shift" data-ar="فترة الشباب">Men's Shift</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-brand text-white font-black py-4 uppercase tracking-widest text-sm hover:bg-blue-600 transition rounded shadow-lg" data-en="SUBMIT & CONNECT VIA WHATSAPP" data-ar="إرسال والتواصل عبر الواتساب">SUBMIT & CONNECT VIA WHATSAPP</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 px-6 border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="SUCCESS STORIES" data-ar="قصص النجاح">SUCCESS STORIES</span>
+                <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="MEMBER REVIEWS" data-ar="آراء الأعضاء">MEMBER REVIEWS</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 rounded-lg shadow-sm">
+                    <div class="text-brand mb-4"><i class="fa-solid fa-quote-left text-2xl"></i></div>
+                    <p class="dark:text-gray-300 text-gray-600 text-sm font-light mb-6" data-en="“Rock Gym changed my daily routine completely. The coaches are extremely supportive and helped me achieve my weight loss goals!”" data-ar="«روكي جيم غير حياتي وروتيني اليومي تماماً. الكابتن هناك داعمين جداً وساعدوني أحقق هدفى في خسارة الوزن!»">“Rock Gym changed my daily routine completely. The coaches are extremely supportive and helped me achieve my weight loss goals!”</p>
+                    <h4 class="font-bold text-sm text-brand" data-en="— Sara M." data-ar="— سارة م.">— Sara M.</h4>
+                </div>
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 rounded-lg shadow-sm">
+                    <div class="text-brand mb-4"><i class="fa-solid fa-quote-left text-2xl"></i></div>
+                    <p class="dark:text-gray-300 text-gray-600 text-sm font-light mb-6" data-en="“Best equipment and atmosphere in the area. Great focus and clean environment. Highly recommended!”" data-ar="«أحسن أجهزة وبيئة تمرين في المنطقة كلها. تركيز عالي ونظافة والتزام، أنصح بيه جداً!»">“Best equipment and atmosphere in the area. Great focus and clean environment. Highly recommended!”</p>
+                    <h4 class="font-bold text-sm text-brand" data-en="— Mahmoud K." data-ar="— محمود ك.">— Mahmoud K.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6 dark:bg-cardBg/30 bg-gray-50 border-t dark:border-white/10 border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="GOT QUESTIONS?" data-ar="الأسئلة الشائعة">GOT QUESTIONS?</span>
+                <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="FREQUENTLY ASKED QUESTIONS" data-ar="كل ما تريد معرفته">FREQUENTLY ASKED QUESTIONS</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-base mb-2 text-brand" data-en="Do I need to book in advance for daily sessions?" data-ar="هل يجب الحجز مسبقاً للحصص اليومية؟">Do I need to book in advance for daily sessions?</h3>
+                    <p class="dark:text-gray-400 text-gray-600 text-sm font-light" data-en="No booking required! You can just drop by during operating hours or pay 25 EGP at the reception." data-ar="لا داعي للحجز المسبق! يمكنك الحضور مباشرة في مواعيد العمل ودفع 25 جنيه في الاستقبال.">No booking required! You can just drop by during operating hours or pay 25 EGP at the reception.</p>
+                </div>
+                <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-base mb-2 text-brand" data-en="Are there private trainers for ladies?" data-ar="هل توجد كابتن مخصصة للبنات؟">Are there private trainers for ladies?</h3>
+                    <p class="dark:text-gray-400 text-gray-600 text-sm font-light" data-en="Yes, dedicated female coaching is available during the morning shift to ensure complete privacy and comfort." data-ar="نعم، توجد كابتن محترفة متواجدة طوال فترة البنات لضمان الخصوصية والتركيز التام على أهدافك.">Yes, dedicated female coaching is available during the morning shift to ensure complete privacy and comfort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section id="contact" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-brand font-bold tracking-widest text-xs uppercase block mb-2" data-en="FIND US" data-ar="موقعنا">FIND US</span>
+            <h2 class="text-4xl md:text-6xl font-black uppercase italic dark:text-white text-gray-900" data-en="LOCATION & CONTACT" data-ar="الموقع وطرق التواصل">LOCATION & CONTACT</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+            <div class="dark:bg-cardBg bg-white border dark:border-white/10 border-gray-200 p-8 rounded-lg text-center lg:text-left rtl:lg:text-right shadow-sm">
+                <div class="text-brand text-4xl mb-4"><i class="fa-solid fa-location-dot"></i></div>
+                <h3 class="text-xl font-bold uppercase mb-2 dark:text-white text-gray-900" data-en="Magria Village Bridge" data-ar="كوبري قرية مجريا">Magria Village Bridge</h3>
+                <p class="dark:text-gray-400 text-gray-600 text-sm mb-6" data-en="Right next to the Car Wash station." data-ar="بجوار مغسلة العربيات.">Right next to the Car Wash station.</p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 text-xs font-bold uppercase tracking-wider">
+                    <a href="tel:01154445363" class="bg-gray-100 dark:bg-white/10 dark:text-white text-gray-900 px-6 py-3 rounded hover:bg-brand hover:text-white dark:hover:bg-brand transition text-center" data-en="Call Ladies Coach" data-ar="اتصل بكابتن البنات">Call Ladies Coach</a>
+                    <a href="tel:+201029896523" class="bg-gray-100 dark:bg-white/10 dark:text-white text-gray-900 px-6 py-3 rounded hover:bg-brand hover:text-white dark:hover:bg-brand transition text-center" data-en="Call Men's Coach" data-ar="اتصل بكابتن الشباب">Call Men's Coach</a>
+                </div>
+            </div>
+            <!-- Google Maps Embed -->
+            <div class="h-80 rounded-lg overflow-hidden border dark:border-white/10 border-gray-200 shadow-sm">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.0!2d30.98!3d30.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDE4JzM2LjAiTiAzMMKwNTgnNDguMCJF!5e0!3m2!1sen!2seg!4v1650000000000!5m2!1sen!2seg" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201029896523" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl transition hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="dark:bg-cardBg bg-white border-t dark:border-white/10 border-gray-200 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left rtl:md:text-right">
+            <div>
+                <a href="#" class="text-2xl font-black tracking-widest uppercase italic dark:text-white text-gray-900">ROCK<span class="text-brand">.</span> GYM</a>
+                <p class="text-gray-500 text-xs mt-2" data-en="© 2026 ROCK GYM. All Rights Reserved." data-ar="© 2026 روكي جيم. جميع الحقوق محفوظة.">© 2026 ROCK GYM. All Rights Reserved.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-end space-y-2">
+                <div class="flex space-x-6 rtl:space-x-reverse text-gray-400 mb-2">
+                    <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-facebook text-xl"></i></a>
+                </div>
+                <p class="text-xs text-gray-400 font-medium" data-en="Designed & Developed by Eng. Ebrahim Saad Abdelmawla 🇪🇬" data-ar="تصميم وبرمجة المهندس/ إبراهيم سعد عبدالمولى 🇪🇬">
+                    Designed & Developed by Eng. Ebrahim Saad Abdelmawla 🇪🇬
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Controllers -->
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const root = document.getElementById('html-root');
+            const body = document.body;
+            const langBtn = document.getElementById('lang-btn');
+            const langBtnMob = document.getElementById('lang-btn-mob');
+
+            if (currentLang === 'ar') {
+                root.setAttribute('dir', 'rtl');
+                body.classList.add('lang-ar');
+                langBtn.innerText = 'English 🇬🇧';
+                langBtnMob.innerText = 'EN';
+            } else {
+                root.setAttribute('dir', 'ltr');
+                body.classList.remove('lang-ar');
+                langBtn.innerText = 'العربية 🇸🇦';
+                langBtnMob.innerText = 'عربي';
+            }
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+        }
+
+        function calculateBMI() {
+            const w = parseFloat(document.getElementById('bmi-weight').value);
+            const h = parseFloat(document.getElementById('bmi-height').value) / 100;
+            const res = document.getElementById('bmi-result');
+
+            if (!w || !h) {
+                res.classList.remove('hidden');
+                res.innerText = currentLang === 'ar' ? 'يرجى إدخال الوزن والطول بشكل صحيح!' : 'Please enter valid weight and height!';
+                return;
+            }
+
+            const bmi = (w / (h * h)).toFixed(1);
+            let msg = '';
+
+            if (currentLang === 'ar') {
+                if (bmi < 18.5) msg = `مؤشر كتلة الجسم الخاص بك هو ${bmi} (وزن أقل من الطبيعي، انضم إلينا لزيادة الكتلة العضلية!)`;
+                else if (bmi < 25) msg = `مؤشر كتلة الجسم الخاص بك هو ${bmi} (وزن مثالي ورائع، حافظ على لياقتك معنا!)`;
+                else if (bmi < 30) msg = `مؤشر كتلة الجسم الخاص بك هو ${bmi} (وزن زائد، ابدأ معنا اليوم لإنقاص الوزن وتحقيق هدفك!)`;
+                else msg = `مؤشر كتلة الجسم الخاص بك هو ${bmi} (سمنة، لا تقلق روكي جيم هنا لمساعدتك على تغيير جسمك كلياً!)`;
+            } else {
+                if (bmi < 18.5) msg = `Your BMI is ${bmi} (Underweight. Join us to build lean muscle mass!)`;
+                else if (bmi < 25) msg = `Your BMI is ${bmi} (Normal weight. Keep up your elite conditioning!)`;
+                else if (bmi < 30) msg = `Your BMI is ${bmi} (Overweight. Start your fat-loss journey with us today!)`;
+                else msg = `Your BMI is ${bmi} (Obese. Rock Gym is here to completely transform your physique!)`;
+            }
+
+            res.classList.remove('hidden');
+            res.innerText = msg;
+        }
+
+        function downloadGuide() {
+            alert(currentLang === 'ar' ? 'تم بدء تحميل دليل التغذية المجاني! تواصل معنا عبر الواتساب للحصول على النسخة الكاملة.' : 'Downloading Free Nutrition Guide! Contact us via WhatsApp for the full version.');
+        }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const plan = document.getElementById('client-plan').value;
+
+            const message = `Hello Rock Gym, I want to book/inquire.%0A- Name: ${name}%0A- Phone: ${phone}%0A- Choice: ${plan}`;
+            window.open(`https://wa.me/201029896523?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
